@@ -1,5 +1,6 @@
 import ModuleShell from '../../components/ModuleShell.jsx'
 import ClickReveal from '../../components/ClickReveal.jsx'
+import FormulaBox from '../../components/FormulaBox.jsx'
 import { formatCurrency } from '../../lib/format.js'
 
 const revenue = 500000
@@ -14,9 +15,28 @@ export default function IncomeStatement({ module }) {
   return (
     <ModuleShell
       module={module}
-      explainer="The income statement answers one question: did the business make money over a period of time? It starts with everything the business sold, then subtracts costs in stages until only profit is left. Click each line to see what it means and how it flows into the next."
+      explainer={
+        <>
+          <p>
+            The income statement answers one question: did the business make money over a period of time — a month,
+            a quarter, a year? Unlike the balance sheet, which is a snapshot at a single instant, this is a movie
+            covering a stretch of time. It starts with everything the business sold and works down through several
+            layers of cost, each one stripping away a different kind of expense, until whatever survives at the
+            bottom is real profit.
+          </p>
+          <p>
+            The reason it's built as a cascade rather than one big subtraction is that each subtotal tells a
+            different story. Gross profit shows whether the product itself is priced sensibly above what it costs
+            to make; operating income shows whether the business as a whole is run efficiently; net income shows
+            what's actually left for the owners after taxes. Click each line below to see what it means and how it
+            flows into the next.
+          </p>
+        </>
+      }
       whyItMatters="Net income is the headline number investors and lenders look at first — and every line above it explains exactly where that profit came from, or where it leaked away."
     >
+      <FormulaBox label="The cascade" formula="Revenue − COGS − OpEx − Tax = Net Income" />
+
       <div className="space-y-2">
         <ClickReveal
           label="Revenue"

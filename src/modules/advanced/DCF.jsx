@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import ModuleShell from '../../components/ModuleShell.jsx'
 import Slider from '../../components/Slider.jsx'
+import ExampleBox from '../../components/ExampleBox.jsx'
+import FormulaBox from '../../components/FormulaBox.jsx'
 import { formatCurrency, formatPercent } from '../../lib/format.js'
 
 const FORECAST_YEARS = [1, 2, 3, 4, 5]
@@ -48,9 +50,43 @@ export default function DCF({ module }) {
   return (
     <ModuleShell
       module={module}
-      explainer="A DCF values a business as the sum of every rupee of cash it will ever generate, discounted back to what that's worth today. Since you can't forecast forever, everything past the explicit forecast window gets bundled into a single 'terminal value.' Drag the assumptions below and watch the valuation respond."
+      explainer={
+        <>
+          <p>
+            A rupee promised five years from now isn't worth the same as a rupee sitting in your hand today — partly
+            because a rupee today can be invested and grow, and partly because a future promise carries risk that it
+            might not show up at all. Simply adding up a company's future cash flows would overstate its value, so a
+            DCF instead <strong>discounts</strong> each future cash flow back to today using a rate that reflects
+            both the time value of money and the riskiness of the business, then sums the results.
+          </p>
+          <p>
+            You can't forecast a company's cash flows forever, though, so a DCF explicitly projects only a handful of
+            years — usually five — and bundles everything beyond that into a single number called the{' '}
+            <strong>terminal value</strong>. It's a stand-in for every year of cash flow past the forecast window,
+            built on the simplifying assumption that the business settles into a slow, stable growth rate forever
+            after. Because it's discounted back over so many years and represents an infinite stream, it often ends
+            up being the single largest piece of the entire valuation — sometimes more than half.
+          </p>
+        </>
+      }
       whyItMatters="DCF is the core valuation method behind how analysts value private companies, M&A deals, and long-term equity research."
     >
+      <FormulaBox label="Present value of a cash flow" formula="FCF ÷ (1 + discount rate)^year" />
+
+      <ExampleBox>
+        <p>
+          Suppose you're promised a single lump-sum payment of <strong>₹1,00,00,000 (₹1Cr)</strong>, but not for 3
+          years — and you use a 10% discount rate to reflect what that money could otherwise earn elsewhere. Its
+          value today isn't ₹1Cr; it's ₹1Cr divided by 1.10, compounded three times over.
+        </p>
+        <p className="font-mono text-sm">₹1,00,00,000 ÷ (1.10)³ = ₹1,00,00,000 ÷ 1.331 ≈ ₹75,12,022</p>
+        <p>
+          That roughly <strong>₹75.1L</strong> is the present value of the future ₹1Cr — the amount you'd need to
+          invest today at 10% to end up with exactly ₹1Cr in three years. The model below does this same discounting
+          for every year of forecast cash flow, plus the terminal value, and adds them all up.
+        </p>
+      </ExampleBox>
+
       <div className="grid gap-8 md:grid-cols-2">
         <div className="space-y-6">
           <Slider

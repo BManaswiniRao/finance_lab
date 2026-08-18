@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import ModuleShell from '../../components/ModuleShell.jsx'
+import FormulaBox from '../../components/FormulaBox.jsx'
 import { formatCurrency } from '../../lib/format.js'
 
 const TRANSACTIONS = [
@@ -94,9 +95,30 @@ export default function DebitsCredits({ module }) {
   return (
     <ModuleShell
       module={module}
-      explainer="Every transaction touches at least two accounts: one gets a debit (left side), the other a credit (right side). Debits increase assets and expenses; credits increase liabilities, equity, and revenue. Drag each transaction onto the side you think it belongs."
+      explainer={
+        <>
+          <p>
+            The words "debit" and "credit" sound like judgments — good news versus bad news — but they're really
+            nothing more than <strong>left</strong> and <strong>right</strong>. Every account in the books is drawn
+            as a two-column ledger called a <strong>T-account</strong>: whatever gets entered on the left is a
+            debit, whatever gets entered on the right is a credit. That's the entire definition. Every transaction
+            touches at least two accounts, and every time, one gets a debit and the other a credit.
+          </p>
+          <p>
+            What decides which side a number lands on is the <em>type</em> of account it's hitting. Assets and
+            expenses grow when you write on their left side and shrink when you write on their right, while
+            liabilities, equity, and revenue work the opposite way — they grow on the right. It feels arbitrary
+            until you remember it's just enforcing the accounting equation: for the books to stay in balance, the
+            total written on the left across all accounts has to equal the total written on the right. Drag each
+            transaction below onto the side you think it belongs.
+          </p>
+        </>
+      }
       whyItMatters="This debit/credit mechanism is what keeps the accounting equation balanced on every single transaction — it's the actual mechanics behind 'the books balance,' not just a rule to memorize."
     >
+      <FormulaBox label="Debit side increases" formula="Assets, Expenses" />
+      <FormulaBox label="Credit side increases" formula="Liabilities, Equity, Revenue" />
+
       {!current ? (
         <div className="py-10 text-center">
           <p className="mb-3 text-lg font-semibold text-good">All transactions sorted correctly.</p>

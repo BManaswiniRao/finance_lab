@@ -11,6 +11,8 @@ import {
 } from 'recharts'
 import ModuleShell from '../../components/ModuleShell.jsx'
 import Slider from '../../components/Slider.jsx'
+import ExampleBox from '../../components/ExampleBox.jsx'
+import FormulaBox from '../../components/FormulaBox.jsx'
 import { formatCurrency, formatPercent } from '../../lib/format.js'
 
 const FACE_VALUE = 1000
@@ -64,9 +66,45 @@ export default function BondPricing({ module }) {
   return (
     <ModuleShell
       module={module}
-      explainer="A bond pays a fixed coupon no matter what happens to interest rates elsewhere. When market rates rise above that coupon, the bond's fixed payments look less attractive, so its price has to fall to compensate a new buyer — and the reverse happens when rates fall. That's why bond prices and market interest rates move in opposite directions, always."
+      explainer={
+        <>
+          <p>
+            A bond's coupon is fixed the day it's issued — locked in regardless of what happens to interest rates
+            afterward. How attractive that fixed coupon looks depends entirely on where market rates sit later: if
+            rates rise after you buy, your bond's coupon looks stingy next to what newly issued bonds now pay, and if
+            rates fall, that same coupon suddenly looks generous.
+          </p>
+          <p>
+            Price is the market's way of correcting for that gap. When the coupon rate exceeds the market rate,
+            buyers bid the price up above face value to a <strong>premium</strong>, since they're locking in
+            above-market coupons; when the coupon rate falls short, price drops below face value to a{' '}
+            <strong>discount</strong>, compensating a new buyer for accepting below-market coupons; and when the two
+            rates match exactly, price settles at exactly face value — <strong>par</strong>. That inverse
+            relationship between price and market rate is the single most important mechanic in bond investing.
+          </p>
+        </>
+      }
       whyItMatters="This inverse relationship is why rising interest rates hurt existing bond portfolios — it's one of the most consequential relationships in all of fixed income, and it drives how the entire bond market reprices every time a central bank moves rates."
     >
+      <FormulaBox label="Bond price" formula="Sum of discounted coupons + discounted face value, at the market rate" />
+
+      <ExampleBox>
+        <p>
+          Take a <strong>₹1,000 face-value bond</strong> with a <strong>6% annual coupon</strong> (₹60 a year) and{' '}
+          <strong>5 years to maturity</strong>. If the market rate is also 6%, discounting every coupon and the final
+          face value at that same 6% brings the price out to exactly what the bond promises to pay — <strong>₹1,000</strong>,
+          at par.
+        </p>
+        <p className="font-mono text-sm">Market rate = 6% (= coupon rate) → Price = ₹1,000 (par)</p>
+        <p>
+          Now suppose market rates rise to 8% while the bond still only pays its fixed 6% coupon. Discounting those
+          same ₹60 coupons and ₹1,000 face value at the higher 8% rate produces a smaller present value — the price
+          falls to about <strong>₹920.15</strong>, a discount to face value, because a new buyer will only accept a
+          below-market coupon if they get to buy in cheap.
+        </p>
+        <p className="font-mono text-sm">Market rate = 8% (&gt; coupon rate) → Price ≈ ₹920.15 (discount)</p>
+      </ExampleBox>
+
       <div className="grid gap-8 md:grid-cols-2">
         <div className="space-y-6">
           <div className="rounded-lg border border-stone-200 bg-stone-50 px-4 py-2.5 text-sm text-stone-500">

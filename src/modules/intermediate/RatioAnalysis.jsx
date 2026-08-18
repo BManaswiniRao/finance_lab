@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import ModuleShell from '../../components/ModuleShell.jsx'
 import Slider from '../../components/Slider.jsx'
+import ExampleBox from '../../components/ExampleBox.jsx'
+import FormulaBox from '../../components/FormulaBox.jsx'
 import { formatCurrency, formatPercent, formatRatio } from '../../lib/format.js'
 
 const TONE_STYLES = {
@@ -61,9 +63,40 @@ export default function RatioAnalysis({ module }) {
   return (
     <ModuleShell
       module={module}
-      explainer="A handful of ratios pulled straight from the balance sheet and income statement tell you most of what you need to know about a company's health. Liquidity ratios ask whether it can pay its bills soon. Profitability ratios ask whether it's actually making money. Leverage ratios ask how much of it is funded by debt versus its own equity — and how risky that mix is."
+      explainer={
+        <>
+          <p>
+            A handful of ratios pulled straight from the balance sheet and income statement tell you most of what you
+            need to know about a company's health, without reading a single footnote. <strong>Liquidity ratios</strong>{' '}
+            ask whether it can pay its bills soon. <strong>Profitability ratios</strong> ask whether it's actually
+            making money on what it sells. <strong>Leverage ratios</strong> ask how much of the business is funded by
+            debt versus its own equity, and how risky that mix is if revenue dips.
+          </p>
+          <p>
+            No single ratio tells the whole story — a company can look great on profitability while quietly running
+            out of cash, or look conservative on leverage while barely making a margin. That's why analysts always
+            read them as a set: each one checks a different way the business could be in trouble.
+          </p>
+        </>
+      }
       whyItMatters="These are the exact ratios analysts pull first when screening a company — they turn a wall of financial statements into a handful of numbers you can judge at a glance."
     >
+      <FormulaBox label="Current ratio" formula="Current Assets ÷ Current Liabilities" />
+
+      <ExampleBox>
+        <p>
+          A company's balance sheet shows <strong>₹60,00,000</strong> in current assets (cash, receivables,
+          inventory it expects to turn into cash within a year) and <strong>₹40,00,000</strong> in current
+          liabilities (bills, short-term loans, and other obligations due within a year).
+        </p>
+        <p className="font-mono text-sm">₹60,00,000 ÷ ₹40,00,000 = 1.5</p>
+        <p>
+          A current ratio of 1.5 means the company has ₹1.50 of short-term assets for every ₹1 of short-term debt —
+          comfortably enough to cover what's coming due without having to scramble for cash or sell off inventory at
+          a discount. Below 1.0, it would be relying on new borrowing or asset sales just to pay its bills on time.
+        </p>
+      </ExampleBox>
+
       <div className="grid gap-8 md:grid-cols-2">
         <div className="space-y-5">
           <p className="text-xs font-semibold uppercase tracking-wide text-stone-400">Balance Sheet</p>

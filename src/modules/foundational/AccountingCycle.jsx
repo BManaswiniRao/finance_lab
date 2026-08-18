@@ -34,7 +34,22 @@ export default function AccountingCycle({ module }) {
   return (
     <ModuleShell
       module={module}
-      explainer="Accounting isn't one step — it's a repeating cycle. A transaction gets recorded, sorted, checked, then rolled up into the reports everyone actually reads. Click through each stage to see what happens there."
+      explainer={
+        <>
+          <p>
+            Accounting isn't a one-off task you finish and file away — it's a loop that runs every single month,
+            quarter, and year a business is alive. A transaction happens, it gets written down, sorted into the
+            right account, double-checked, and finally rolled up into a report. Then the next period starts and the
+            whole thing runs again, because a business never stops transacting.
+          </p>
+          <p>
+            The cycle exists because skipping steps or doing them out of order is exactly how books end up wrong.
+            You can't check whether debits equal credits until every entry has been posted to its ledger, and you
+            can't trust a financial statement until the trial balance has confirmed the underlying numbers add up.
+            Click through each stage below to see what actually happens at each one.
+          </p>
+        </>
+      }
       whyItMatters="Understanding the cycle tells you where numbers on a financial statement actually come from — and where to look when something on a report doesn't add up."
     >
       <div className="mb-6 flex items-center">

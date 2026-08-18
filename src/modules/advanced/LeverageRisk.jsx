@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import ModuleShell from '../../components/ModuleShell.jsx'
 import Slider from '../../components/Slider.jsx'
+import ExampleBox from '../../components/ExampleBox.jsx'
+import FormulaBox from '../../components/FormulaBox.jsx'
 import { formatCurrency, formatNumber, formatPercent } from '../../lib/format.js'
 
 // Price and variable cost are set with a wide contribution margin ($60/unit
@@ -67,9 +69,45 @@ export default function LeverageRisk({ module }) {
   return (
     <ModuleShell
       module={module}
-      explainer="Fixed operating costs and fixed interest costs both act like leverage: because they don't move when sales move, any change in sales flows disproportionately through to what's left over. A small sales swing can turn into a larger swing in operating profit (operating leverage), and interest expense then amplifies that swing again into an even larger change in net income (financial leverage) — for better on the upside, for worse on the downside."
+      explainer={
+        <>
+          <p>
+            Fixed operating costs — rent, salaries, equipment — don't move when sales move, so any change in sales
+            flows disproportionately through to what's left over after covering them. This is{' '}
+            <strong>operating leverage</strong>: a business with a lot of fixed cost relative to its sales sees a
+            small sales swing turn into a much bigger swing in operating profit (EBIT), for better on the upside and
+            for worse on the downside.
+          </p>
+          <p>
+            <strong>Financial leverage</strong> does the same thing one level further down. Interest on debt is also
+            fixed — the company owes it whether EBIT is up or down — so whatever swing operating leverage already
+            produced in EBIT gets amplified again into an even larger swing in net income. The two compound: a
+            company carrying both high fixed costs and heavy debt sees its bottom line swing far more violently, in
+            both directions, than its sales ever do.
+          </p>
+        </>
+      }
       whyItMatters="This is why investors demand higher returns from highly-levered companies — the same sales dip that barely dents a low-leverage competitor can wipe out net income entirely for a company carrying heavy fixed costs and debt."
     >
+      <FormulaBox label="Degree of operating leverage" formula="% Change in EBIT ÷ % Change in Sales" />
+
+      <ExampleBox>
+        <p>
+          Picture two businesses, both selling <strong>5,000 units at ₹100</strong> with a{' '}
+          <strong>₹40 variable cost</strong> per unit — so both earn a ₹60 contribution margin and ₹3,00,000 of total
+          contribution before fixed costs. The only difference is how much of their cost structure is fixed.
+        </p>
+        <p className="font-mono text-sm">
+          Low fixed cost (₹50,000): EBIT = ₹2,50,000 · High fixed cost (₹2,00,000): EBIT = ₹1,00,000
+        </p>
+        <p>
+          Now sales fall 10% for both, to 4,500 units. Contribution drops to ₹2,70,000 for each business alike, but
+          that identical ₹30,000 hit lands very differently: the low-fixed-cost business sees EBIT fall to ₹2,20,000,
+          a 12% drop, while the high-fixed-cost business sees EBIT fall to ₹70,000 — a 30% drop, two-and-a-half times
+          as severe, from the exact same sales decline.
+        </p>
+      </ExampleBox>
+
       <div className="grid gap-8 md:grid-cols-2">
         <div className="space-y-6">
           <div className="rounded-lg border border-stone-200 bg-stone-50 px-4 py-2.5 text-xs text-stone-500">

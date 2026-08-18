@@ -51,7 +51,24 @@ export default function BalanceSheet({ module }) {
   return (
     <ModuleShell
       module={module}
-      explainer="A balance sheet is a snapshot at a single moment: what the business owns (assets), what it owes (liabilities), and what's left for the owners (equity). Both sides are split into 'current' (within a year) and 'non-current' (longer-term). Click any line to learn what it means."
+      explainer={
+        <>
+          <p>
+            A balance sheet is a photograph, not a movie — it freezes the business at one specific moment and shows
+            three things: what it owns (<strong>assets</strong>), what it owes (<strong>liabilities</strong>), and
+            what's left over for the owners (<strong>equity</strong>). Change the date by even a day and some
+            numbers on it would be different, because cash gets spent, invoices get paid, and loans get taken out
+            constantly. That's exactly why it's dated "as of" a specific day rather than covering a range.
+          </p>
+          <p>
+            Both assets and liabilities are split into <strong>current</strong> and{' '}
+            <strong>non-current</strong> — essentially, "within the next year" versus "longer than that." That split
+            matters because it's how you judge whether a business can actually pay its near-term bills: comparing
+            current assets like cash and receivables against current liabilities like short-term debt tells you
+            whether trouble is coming soon or is comfortably far off. Click any line below to see what it means.
+          </p>
+        </>
+      }
       whyItMatters="Unlike the income statement, which covers a period, the balance sheet shows financial position at an instant — it's how lenders and investors judge whether a company can cover its short-term obligations."
     >
       <div className="grid gap-6 md:grid-cols-2">

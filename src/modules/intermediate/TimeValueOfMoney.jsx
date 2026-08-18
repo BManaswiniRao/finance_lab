@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react'
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import ModuleShell from '../../components/ModuleShell.jsx'
 import Slider from '../../components/Slider.jsx'
+import ExampleBox from '../../components/ExampleBox.jsx'
+import FormulaBox from '../../components/FormulaBox.jsx'
 import { formatCurrency, formatPercent } from '../../lib/format.js'
 
 export default function TimeValueOfMoney({ module }) {
@@ -22,9 +24,41 @@ export default function TimeValueOfMoney({ module }) {
   return (
     <ModuleShell
       module={module}
-      explainer="A rupee in your hand today is worth more than a rupee promised years from now — because today's rupee can be invested and start earning a return right away. Time value of money puts a number on that gap: given a rate of return, it tells you what a present sum grows into in the future (future value), or conversely, what a future sum is worth today (present value)."
+      explainer={
+        <>
+          <p>
+            A rupee in your hand today is worth more than a rupee promised years from now — because today's rupee can
+            be invested and start earning a return right away, while the promised rupee just sits there waiting.{' '}
+            <strong>Time value of money</strong> puts a precise number on that gap: given a rate of return, it tells
+            you exactly what a present sum grows into in the future (its <strong>future value</strong>), or
+            conversely, what a future sum is worth if you had it in hand today (its <strong>present value</strong>).
+          </p>
+          <p>
+            The engine behind both directions is compounding — growth building on top of previous growth, not just
+            on the original amount. Push the rate or the number of years up even a little, and the future value moves
+            by a lot more than intuition suggests, which is exactly why this idea underlies almost every decision
+            about saving, borrowing, or investing over time.
+          </p>
+        </>
+      }
       whyItMatters="Time value of money is the foundation under almost every other valuation technique — discounted cash flow, bond pricing, loan amortization, and retirement planning all boil down to moving rupees across time at some rate."
     >
+      <FormulaBox label="Future value" formula="PV × (1 + rate)^years = FV" />
+
+      <ExampleBox>
+        <p>
+          Suppose you invest <strong>₹1,00,000</strong> today at an annual return of <strong>8%</strong>, and leave
+          it untouched for <strong>10 years</strong>. Each year's gain earns its own return the following year, so
+          the growth compounds rather than staying flat.
+        </p>
+        <p className="font-mono text-sm">₹1,00,000 × (1.08)^10 ≈ ₹2,15,893</p>
+        <p>
+          Your original ₹1,00,000 more than doubles to roughly ₹2,15,893 — without adding a single extra rupee of
+          your own. That's the time value of money: the same amount is worth dramatically more in the future than it
+          is today, purely because of the rate it can earn along the way.
+        </p>
+      </ExampleBox>
+
       <div className="space-y-6">
         <div className="grid gap-6 sm:grid-cols-3">
           <Slider

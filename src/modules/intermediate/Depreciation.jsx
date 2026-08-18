@@ -11,6 +11,8 @@ import {
 } from 'recharts'
 import ModuleShell from '../../components/ModuleShell.jsx'
 import Slider from '../../components/Slider.jsx'
+import ExampleBox from '../../components/ExampleBox.jsx'
+import FormulaBox from '../../components/FormulaBox.jsx'
 import { formatCurrency } from '../../lib/format.js'
 
 // Build a year-by-year book value schedule for both methods.
@@ -55,9 +57,42 @@ export default function Depreciation({ module }) {
   return (
     <ModuleShell
       module={module}
-      explainer="When a company buys a long-lived asset, it spreads the cost over the years the asset is used instead of expensing it all at once. Straight-line depreciation spreads that cost evenly, year after year. Declining balance instead applies a fixed rate to whatever book value is left, so it deducts much more in the early years and tapers off — the asset's value 'declines' fastest right after purchase."
+      explainer={
+        <>
+          <p>
+            When a company buys a long-lived asset — a machine, a delivery van, a laptop fleet — it can't just expense
+            the whole cost the day it's bought. Accounting rules require spreading that cost over the years the asset
+            is actually used, a process called <strong>depreciation</strong>. It isn't about tracking what the asset
+            could resell for; it's about matching the expense to the years the asset actually helps generate revenue.
+          </p>
+          <p>
+            <strong>Straight-line depreciation</strong> is the simplest approach: divide the cost evenly across every
+            year of the asset's useful life, so the expense is identical year after year.{' '}
+            <strong>Declining balance</strong> takes a different view — it applies a fixed percentage to whatever
+            book value is left, which means it deducts far more in the early years and tapers off as the asset ages.
+            Both methods land at the same total depreciation by the end; they just disagree on the timing.
+          </p>
+        </>
+      }
       whyItMatters="The method a company picks doesn't change total depreciation over the asset's life, but it does change which years look more or less profitable — and declining balance often defers taxable income into later years."
     >
+      <FormulaBox label="Straight-line" formula="Cost ÷ Useful Life = Annual Expense" />
+
+      <ExampleBox>
+        <p>
+          A delivery company buys a van for <strong>₹6,00,000</strong>, expecting to use it for{' '}
+          <strong>6 years</strong> before replacing it. Under straight-line depreciation, the annual expense is the
+          same every year of its life.
+        </p>
+        <p className="font-mono text-sm">₹6,00,000 ÷ 6 years = ₹1,00,000 per year</p>
+        <p>
+          Under declining balance at double the straight-line rate (2 ÷ 6 years ≈ 33%), year one instead deducts{' '}
+          <strong>₹2,00,000</strong> — double the straight-line figure — because the rate is applied to the full,
+          undepreciated cost of the van. The van looks like it's losing value twice as fast in year one, even though
+          it's the identical vehicle either way.
+        </p>
+      </ExampleBox>
+
       <div className="grid gap-8 md:grid-cols-2">
         <div className="space-y-6">
           <Slider

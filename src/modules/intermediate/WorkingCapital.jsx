@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import ModuleShell from '../../components/ModuleShell.jsx'
 import Slider from '../../components/Slider.jsx'
+import ExampleBox from '../../components/ExampleBox.jsx'
+import FormulaBox from '../../components/FormulaBox.jsx'
 import { formatNumber } from '../../lib/format.js'
 
 const SCALE_MAX = 120
@@ -24,9 +26,42 @@ export default function WorkingCapital({ module }) {
   return (
     <ModuleShell
       module={module}
-      explainer="Inventory sits on the shelf for a while before it sells (Days Inventory Outstanding), and once it sells, customers usually take time to actually pay (Days Sales Outstanding). Meanwhile you get a bit of breathing room because you don't have to pay your own suppliers the instant you buy from them (Days Payables Outstanding). The gap left over — the Cash Conversion Cycle — is how many days of cash the business has to fund out of its own pocket before it gets paid back."
+      explainer={
+        <>
+          <p>
+            Inventory sits on the shelf for a while before it sells — that's{' '}
+            <strong>Days Inventory Outstanding (DIO)</strong>. Once it sells, customers usually take time to actually
+            pay — that's <strong>Days Sales Outstanding (DSO)</strong>. Meanwhile the business gets a bit of breathing
+            room because it doesn't have to pay its own suppliers the instant it buys from them — that's{' '}
+            <strong>Days Payables Outstanding (DPO)</strong>.
+          </p>
+          <p>
+            Put the three together and you get the <strong>Cash Conversion Cycle</strong> — how many days of cash the
+            business has to fund out of its own pocket between paying for stock and actually collecting cash from
+            customers. A shorter cycle means less cash tied up in the day-to-day grind; a longer one means the
+            business needs a bigger cash cushion (or a line of credit) just to keep operating.
+          </p>
+        </>
+      }
       whyItMatters="A company can be fully profitable on paper and still run out of cash if its cash conversion cycle is too long — fast-growing businesses fail this way when sales outpace the cash coming in the door."
     >
+      <FormulaBox label="Cash conversion cycle" formula="DSO + DIO − DPO = Days cash is tied up" />
+
+      <ExampleBox>
+        <p>
+          A small retailer collects payment from customers <strong>40 days</strong> after the sale on average (DSO),
+          and stock typically sits in the store for <strong>50 days</strong> before it sells (DIO). The retailer, in
+          turn, gets <strong>20 days</strong> to pay its own suppliers before payment is due (DPO).
+        </p>
+        <p className="font-mono text-sm">40 + 50 − 20 = 70 days</p>
+        <p>
+          That means the retailer has to fund 70 days of stock and unpaid customer bills entirely out of its own cash
+          before any of that money comes back in the door. If it doesn't have enough cash saved up to cover 70 days
+          of operations, it needs a loan or credit line to bridge the gap — even though the business itself is
+          perfectly healthy.
+        </p>
+      </ExampleBox>
+
       <div className="grid gap-8 md:grid-cols-2">
         <div className="space-y-6">
           <Slider

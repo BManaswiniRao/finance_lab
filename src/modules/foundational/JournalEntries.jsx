@@ -117,7 +117,23 @@ export default function JournalEntries({ module }) {
   return (
     <ModuleShell
       module={module}
-      explainer="Recording a transaction means picking which account gets debited and which gets credited, so the entry balances. Read the scenario, drag the two accounts you think are involved into the Debit and Credit slots, then check your answer."
+      explainer={
+        <>
+          <p>
+            A journal entry is the very first thing that happens when a business transaction gets recorded — before
+            it's sorted into a ledger, before it shows up on any report. It's just a simple statement of which two
+            (or more) accounts a transaction touched, and which side of each got the debit and which got the
+            credit. Every single transaction a business makes, from a ₹1,000 rent payment to a multi-crore
+            acquisition, starts life as a journal entry exactly like the ones below.
+          </p>
+          <p>
+            Writing one correctly means asking two questions: which accounts changed, and did each one go up or
+            down? From there the debit/credit rule you've already seen decides which side each account lands on —
+            get both accounts right and the entry balances automatically. Read the scenario, drag the two accounts
+            you think are involved into the Debit and Credit slots, then check your answer.
+          </p>
+        </>
+      }
       whyItMatters="This is literally what accountants and bookkeeping software do thousands of times a day — every invoice, payment, and payroll run becomes a journal entry exactly like this."
     >
       {done ? (

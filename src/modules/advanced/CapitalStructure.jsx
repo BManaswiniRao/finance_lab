@@ -12,6 +12,8 @@ import {
 } from 'recharts'
 import ModuleShell from '../../components/ModuleShell.jsx'
 import Slider from '../../components/Slider.jsx'
+import ExampleBox from '../../components/ExampleBox.jsx'
+import FormulaBox from '../../components/FormulaBox.jsx'
 import { formatPercent } from '../../lib/format.js'
 
 // Fixed assumptions — kept off the sliders so the module stays focused on
@@ -52,9 +54,46 @@ export default function CapitalStructure({ module }) {
   return (
     <ModuleShell
       module={module}
-      explainer="More debt is cheaper financing — interest is tax-deductible, and debt holders take less risk than shareholders. But loading up on debt raises the risk shareholders bear, so the return they demand (cost of equity) climbs too. Capital structure is about finding the debt/equity mix that minimizes the overall cost of capital."
+      explainer={
+        <>
+          <p>
+            Debt is nearly always the cheaper way to fund a business. Lenders get repaid before shareholders and
+            often hold collateral, so they demand a lower return than equity investors do — and on top of that,
+            interest payments are tax-deductible, which shaves the effective cost of debt down even further (the "tax
+            shield"). Judged purely on cost, more debt looks like a free lunch.
+          </p>
+          <p>
+            It isn't, because debt is a fixed obligation — the company owes those interest payments whether the year
+            is good or bad — and every rupee of debt piled on makes the cash left over for shareholders more
+            volatile. Equity holders respond by demanding a higher return to compensate for that extra risk, so cost
+            of equity climbs as leverage rises. Capital structure decisions are really about finding the mix where
+            the savings from cheap debt roughly balance the rising cost of increasingly risky equity.
+          </p>
+        </>
+      }
       whyItMatters="This is exactly the trade-off CFOs weigh when deciding how to fund growth — take on more debt, or issue more equity."
     >
+      <FormulaBox
+        label="Cost of equity rises with leverage"
+        formula="Unlevered Cost of Equity + (Unlevered Cost of Equity − Cost of Debt) × D/E"
+      />
+
+      <ExampleBox title="Two points on the curve">
+        <p>
+          Compare two financing choices for the same company, using the fixed assumptions on this page (6% cost of
+          debt, 25% tax rate, 10% unlevered cost of equity). At <strong>0% debt</strong>, the company is funded
+          entirely by equity, so cost of equity stays at the unlevered baseline of 10% — and so does WACC, since
+          there's no cheap debt in the mix to blend in.
+        </p>
+        <p className="font-mono text-sm">0% debt → Cost of equity = 10% · WACC = 10%</p>
+        <p>
+          At <strong>50% debt</strong>, the leverage effect kicks in: cost of equity rises to 10% + (10% − 6%) ×
+          (50%/50%) = 14%, but WACC actually falls to 9.25% — the cheap, tax-advantaged debt more than offsets the
+          higher return now required on the smaller slice of equity.
+        </p>
+        <p className="font-mono text-sm">50% debt → Cost of equity = 14% · WACC = 9.25%</p>
+      </ExampleBox>
+
       <div className="grid gap-8 md:grid-cols-2">
         <div className="space-y-6">
           <Slider

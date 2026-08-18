@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import ModuleShell from '../../components/ModuleShell.jsx'
+import FormulaBox from '../../components/FormulaBox.jsx'
 import { formatCurrency, formatPercent, formatRatio } from '../../lib/format.js'
 
 // Four deliberately mismatched businesses — different sizes, different
@@ -192,9 +193,28 @@ export default function CompanyComparison({ module }) {
   return (
     <ModuleShell
       module={module}
-      explainer="Vantage Cloud Systems books ₹120Cr in revenue; Meridian Regional Bank sits on ₹2,000Cr in assets. Comparing those raw numbers tells you almost nothing — the companies are different sizes and run entirely different business models. Ratios fix that: dividing one number by another strips out scale, so a 25% margin means the same thing whether it belongs to a software company or a retailer. Pick two companies below and compare them on the ratios that actually normalize for size and industry."
+      explainer={
+        <>
+          <p>
+            Vantage Cloud Systems books ₹120Cr in revenue; Meridian Regional Bank sits on ₹2,000Cr in assets.
+            Comparing those raw numbers tells you almost nothing — the companies are wildly different sizes and run
+            entirely different business models. <strong>Ratios</strong> fix that: dividing one number by another
+            strips out scale, so a 25% margin means the same thing whether it belongs to a software company or a
+            retailer.
+          </p>
+          <p>
+            Different ratios normalize for different things, which is why analysts rarely lean on just one. Margin
+            and return on equity show how efficiently a company turns sales and shareholder capital into profit;
+            debt-to-equity shows how much of the balance sheet is borrowed money versus owners' money; P/E shows how
+            expensive the stock is relative to what the company actually earns. Pick two companies below and compare
+            them across all four at once.
+          </p>
+        </>
+      }
       whyItMatters="This is literally how equity analysts screen stocks within — and sometimes across — sectors: compare ratios first to spot who's more profitable, more levered, or more richly valued, then dig deeper into the ones that stand out."
     >
+      <FormulaBox label="Return on Equity" formula="Net Income ÷ Shareholders' Equity" />
+
       <div className="mb-6 grid gap-4 sm:grid-cols-2">
         <label className="block">
           <div className="mb-1.5 text-sm font-medium text-stone-700">Company A</div>

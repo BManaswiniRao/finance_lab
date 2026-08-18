@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 import ModuleShell from '../../components/ModuleShell.jsx'
 import Slider from '../../components/Slider.jsx'
+import ExampleBox from '../../components/ExampleBox.jsx'
+import FormulaBox from '../../components/FormulaBox.jsx'
 import { formatPercent } from '../../lib/format.js'
 
 const DEBT_COLOR = '#78716c'
@@ -30,9 +32,44 @@ export default function WACC({ module }) {
   return (
     <ModuleShell
       module={module}
-      explainer="WACC blends what it costs a company to borrow — adjusted down for the tax shield on interest — with what it costs to raise equity, which is simply the return investors require for the risk they're taking. Each is weighted by how much of the company's capital comes from that source."
+      explainer={
+        <>
+          <p>
+            A company almost never funds itself with just one kind of capital — it's usually some blend of debt from
+            lenders and equity from shareholders, and each has its own cost. <strong>WACC</strong> (weighted average
+            cost of capital) blends those two costs into a single number, weighted by how much of the company's total
+            capital comes from each source. It's the average return the company must earn across everything it does
+            just to satisfy everyone who funded it.
+          </p>
+          <p>
+            The debt side of that blend needs one adjustment before it's comparable to the equity side: interest paid
+            to lenders is tax-deductible, so the government effectively subsidizes part of every debt-funded rupee,
+            while dividends paid to shareholders come out of profit that's already been taxed — no such break exists
+            there. That's why the cost of debt in the formula gets multiplied by (1 − tax rate); what matters is the{' '}
+            <strong>after-tax</strong> cost of debt, not the rate printed on the loan.
+          </p>
+        </>
+      }
       whyItMatters="WACC is the discount rate used in DCF valuation and the minimum return a company's investments need to clear to create value — its 'hurdle rate.'"
     >
+      <FormulaBox
+        label="WACC"
+        formula="(Weight of Equity × Cost of Equity) + (Weight of Debt × Cost of Debt × (1 − Tax Rate))"
+      />
+
+      <ExampleBox>
+        <p>
+          Take a company financed <strong>60% by equity</strong>, where shareholders expect a 14% return, and{' '}
+          <strong>40% by debt</strong>, borrowed at an 8% interest rate, with a 25% tax rate. The equity piece
+          contributes its full cost to the blend; the debt piece gets discounted for the tax shield first.
+        </p>
+        <p className="font-mono text-sm">(60% × 14%) + (40% × 8% × (1 − 25%)) = 8.4% + 2.4% = 10.8%</p>
+        <p>
+          That <strong>10.8%</strong> is the company's WACC — the minimum return its investments need to clear
+          before they're actually creating value for the people who funded them.
+        </p>
+      </ExampleBox>
+
       <div className="grid gap-8 md:grid-cols-2">
         <div className="space-y-6">
           <Slider

@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react'
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts'
 import ModuleShell from '../../components/ModuleShell.jsx'
 import Slider from '../../components/Slider.jsx'
+import ExampleBox from '../../components/ExampleBox.jsx'
+import FormulaBox from '../../components/FormulaBox.jsx'
 import { formatCurrency, formatPercent } from '../../lib/format.js'
 
 const CATEGORIES = [
@@ -25,9 +27,39 @@ export default function Budgeting({ module }) {
   return (
     <ModuleShell
       module={module}
-      explainer="Fixed costs — like rent and a car payment — stay roughly the same every month and are hard to change on short notice. Variable costs — groceries, entertainment, savings, discretionary spending — flex up or down depending on what you choose to spend. A monthly budget is just the sum of both, and knowing which is which tells you what you can actually adjust when money gets tight."
+      explainer={
+        <>
+          <p>
+            <strong>Fixed costs</strong> — rent, a car payment, a phone plan — stay roughly the same every month and
+            are hard to change on short notice; they show up whether you had a great month or a terrible one.{' '}
+            <strong>Variable costs</strong> — groceries, entertainment, savings, discretionary spending — flex up or
+            down depending on what you actually choose to spend, month to month.
+          </p>
+          <p>
+            A monthly budget is just the sum of both. But the split matters more than the total: it tells you what
+            you can realistically adjust when money gets tight this month, versus what would take a bigger, slower
+            change — like moving to cheaper housing — to bring down at all.
+          </p>
+        </>
+      }
       whyItMatters="When cash is tight, cutting variable costs is realistic and fast — but shrinking fixed costs usually means a bigger structural change, like moving to cheaper housing or refinancing a loan, which takes time to pull off."
     >
+      <FormulaBox label="This month" formula="Fixed Costs + Variable Costs = Total Budget" />
+
+      <ExampleBox>
+        <p>
+          A young professional's monthly budget has three line items: <strong>₹15,000</strong> rent (fixed —
+          locked in by the lease), <strong>₹6,000</strong> groceries (variable — depends on what she buys and
+          where), and <strong>₹3,000</strong> entertainment (variable — entirely discretionary).
+        </p>
+        <p className="font-mono text-sm">₹15,000 + ₹6,000 + ₹3,000 = ₹24,000</p>
+        <p>
+          If an unexpected expense hits and she needs to free up cash fast, the rent isn't going anywhere this month
+          — but she can realistically trim groceries and skip entertainment, freeing up ₹9,000 without
+          renegotiating anything. That's the practical value of knowing which costs are fixed and which are variable.
+        </p>
+      </ExampleBox>
+
       <div className="grid gap-8 md:grid-cols-2">
         <div className="space-y-5">
           {CATEGORIES.map((c) => (
