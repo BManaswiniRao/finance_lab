@@ -1,0 +1,201 @@
+import { lazy } from 'react'
+import {
+  Scale,
+  ArrowLeftRight,
+  RefreshCw,
+  FileText,
+  Landmark,
+  Wallet,
+  BookOpenCheck,
+  TrendingDown,
+  Target,
+  PieChart,
+  Clock,
+  LineChart,
+  PiggyBank,
+  Calculator,
+  Layers,
+  Percent,
+  Users,
+  BarChart3,
+  ShieldAlert,
+} from 'lucide-react'
+
+// Levels drive the dashboard grouping and the accent styling per section.
+export const LEVELS = {
+  foundational: { label: 'Foundational', color: 'var(--color-level-foundational)' },
+  intermediate: { label: 'Intermediate', color: 'var(--color-level-intermediate)' },
+  advanced: { label: 'Advanced', color: 'var(--color-level-advanced)' },
+}
+
+export const MODULES = [
+  // Foundational
+  {
+    id: 'accounting-equation',
+    level: 'foundational',
+    title: 'The Accounting Equation',
+    blurb: 'Why Assets always equal Liabilities + Equity.',
+    icon: Scale,
+    Component: lazy(() => import('../modules/foundational/AccountingEquation.jsx')),
+  },
+  {
+    id: 'debits-credits',
+    level: 'foundational',
+    title: 'Debits and Credits',
+    blurb: 'Drag transactions into the right side of a T-account.',
+    icon: ArrowLeftRight,
+    Component: lazy(() => import('../modules/foundational/DebitsCredits.jsx')),
+  },
+  {
+    id: 'accounting-cycle',
+    level: 'foundational',
+    title: 'The Accounting Cycle',
+    blurb: 'Walk through journal, ledger, trial balance, and statements.',
+    icon: RefreshCw,
+    Component: lazy(() => import('../modules/foundational/AccountingCycle.jsx')),
+  },
+  {
+    id: 'income-statement',
+    level: 'foundational',
+    title: 'Reading an Income Statement',
+    blurb: 'Click each line to see how profit is built, step by step.',
+    icon: FileText,
+    Component: lazy(() => import('../modules/foundational/IncomeStatement.jsx')),
+  },
+  {
+    id: 'balance-sheet',
+    level: 'foundational',
+    title: 'Reading a Balance Sheet',
+    blurb: 'Explore current vs. non-current assets and liabilities.',
+    icon: Landmark,
+    Component: lazy(() => import('../modules/foundational/BalanceSheet.jsx')),
+  },
+  {
+    id: 'cash-flow-statement',
+    level: 'foundational',
+    title: 'Reading a Cash Flow Statement',
+    blurb: 'See how operating, investing, and financing activities move cash.',
+    icon: Wallet,
+    Component: lazy(() => import('../modules/foundational/CashFlowStatement.jsx')),
+  },
+  {
+    id: 'journal-entries',
+    level: 'foundational',
+    title: 'Basic Journal Entries',
+    blurb: 'Drag accounts into debit/credit slots and get instant feedback.',
+    icon: BookOpenCheck,
+    Component: lazy(() => import('../modules/foundational/JournalEntries.jsx')),
+  },
+
+  // Intermediate
+  {
+    id: 'depreciation',
+    level: 'intermediate',
+    title: 'Depreciation Methods',
+    blurb: 'Compare straight-line vs. declining balance over an asset’s life.',
+    icon: TrendingDown,
+    Component: lazy(() => import('../modules/intermediate/Depreciation.jsx')),
+  },
+  {
+    id: 'break-even',
+    level: 'intermediate',
+    title: 'Break-Even Analysis',
+    blurb: 'Find the sales volume where profit turns positive.',
+    icon: Target,
+    Component: lazy(() => import('../modules/intermediate/BreakEven.jsx')),
+  },
+  {
+    id: 'ratio-analysis',
+    level: 'intermediate',
+    title: 'Financial Ratio Analysis',
+    blurb: 'Liquidity, profitability, and leverage ratios, live.',
+    icon: PieChart,
+    Component: lazy(() => import('../modules/intermediate/RatioAnalysis.jsx')),
+  },
+  {
+    id: 'working-capital',
+    level: 'intermediate',
+    title: 'Working Capital Management',
+    blurb: 'Adjust receivables, payables, and inventory to see the cash cycle shift.',
+    icon: RefreshCw,
+    Component: lazy(() => import('../modules/intermediate/WorkingCapital.jsx')),
+  },
+  {
+    id: 'time-value-of-money',
+    level: 'intermediate',
+    title: 'Time Value of Money',
+    blurb: 'Present and future value of a rupee over time.',
+    icon: Clock,
+    Component: lazy(() => import('../modules/intermediate/TimeValueOfMoney.jsx')),
+  },
+  {
+    id: 'compound-interest',
+    level: 'intermediate',
+    title: 'Compound vs. Simple Interest',
+    blurb: 'Watch compounding pull away from simple growth.',
+    icon: LineChart,
+    Component: lazy(() => import('../modules/intermediate/CompoundInterest.jsx')),
+  },
+  {
+    id: 'budgeting-basics',
+    level: 'intermediate',
+    title: 'Budgeting Basics',
+    blurb: 'Fixed vs. variable costs in a monthly budget.',
+    icon: PiggyBank,
+    Component: lazy(() => import('../modules/intermediate/Budgeting.jsx')),
+  },
+
+  // Advanced
+  {
+    id: 'dcf-valuation',
+    level: 'advanced',
+    title: 'DCF Valuation',
+    blurb: 'Value a company from projected cash flows.',
+    icon: Calculator,
+    Component: lazy(() => import('../modules/advanced/DCF.jsx')),
+  },
+  {
+    id: 'capital-structure',
+    level: 'advanced',
+    title: 'Capital Structure',
+    blurb: 'Trade off debt and equity financing.',
+    icon: Layers,
+    Component: lazy(() => import('../modules/advanced/CapitalStructure.jsx')),
+  },
+  {
+    id: 'wacc',
+    level: 'advanced',
+    title: 'Cost of Capital (WACC)',
+    blurb: 'Blend the cost of debt and equity into one hurdle rate.',
+    icon: Percent,
+    Component: lazy(() => import('../modules/advanced/WACC.jsx')),
+  },
+  {
+    id: 'company-comparison',
+    level: 'advanced',
+    title: 'Ratio-Based Company Comparison',
+    blurb: 'Compare two companies side by side on the numbers that matter.',
+    icon: Users,
+    Component: lazy(() => import('../modules/advanced/CompanyComparison.jsx')),
+  },
+  {
+    id: 'bond-pricing',
+    level: 'advanced',
+    title: 'Bond Pricing and Yield',
+    blurb: 'See why bond prices move opposite to interest rates.',
+    icon: BarChart3,
+    Component: lazy(() => import('../modules/advanced/BondPricing.jsx')),
+  },
+  {
+    id: 'leverage-risk',
+    level: 'advanced',
+    title: 'Leverage and Risk',
+    blurb: 'Operating and financial leverage magnify swings in profit.',
+    icon: ShieldAlert,
+    Component: lazy(() => import('../modules/advanced/LeverageRisk.jsx')),
+  },
+]
+
+export function getModuleById(id) {
+  return MODULES.find((m) => m.id === id)
+}

@@ -1,0 +1,102 @@
+@import "tailwindcss";
+@import "@fontsource-variable/fraunces";
+@import "@fontsource-variable/manrope";
+
+@theme {
+  /* Type */
+  --font-display: 'Fraunces Variable', 'Iowan Old Style', ui-serif, Georgia, serif;
+  --font-sans: 'Manrope Variable', ui-sans-serif, system-ui, sans-serif;
+
+  /* Surfaces */
+  --color-bg: #faf6ef;
+  --color-surface: #fffdf9;
+  --color-ink: #211c16;
+  --color-ink-soft: #6f6659;
+  --color-line: #e8e0d2;
+
+  /* Primary accent (interactive elements site-wide) */
+  --color-accent: #5b3df5;
+  --color-accent-soft: #ece7fd;
+
+  /* Level colors */
+  --color-level-foundational: #2f6fed;
+  --color-level-intermediate: #b3651a;
+  --color-level-advanced: #b3175e;
+
+  /* Semantic outcome colors */
+  --color-good: #157a4a;
+  --color-good-soft: #dcf3e6;
+  --color-bad: #c02929;
+  --color-bad-soft: #fbe4e2;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(33, 28, 22, 0.06) 1px, transparent 0);
+  background-size: 28px 28px;
+}
+
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-ink);
+}
+
+/* Simple range slider styling to look consistent across browsers */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--color-line);
+  outline: none;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  background: var(--color-accent);
+  cursor: pointer;
+  border: 3px solid var(--color-surface);
+  box-shadow: 0 2px 6px rgba(91, 61, 245, 0.35);
+  transition: transform 0.15s ease;
+}
+
+input[type='range']::-webkit-slider-thumb:hover {
+  transform: scale(1.12);
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  background: var(--color-accent);
+  cursor: pointer;
+  border: 3px solid var(--color-surface);
+  box-shadow: 0 2px 6px rgba(91, 61, 245, 0.35);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.45s ease both;
+}
